@@ -1,62 +1,53 @@
-//initialize function called when the script loads
-function initialize(){
-    cities();
-};
+//initializer function calls all functions in the main method
+function initialize() {
+  tableConstructor(roomies, curChore);
+}
+//this function creates a table in html
+function tableConstructor(arr1,arr2) {
 
-//function to create a table with cities and their populations
-function cities(){
-    //define two arrays for cities and population
-    var cities = [
-        'Madison',
-        'Milwaukee',
-        'Green Bay',
-        'Superior'
-    ];
-    var population = [
-        233209,
-        594833,
-        104057,
-        27244
-    ];
+  //create a table element
+  var table = document.createElement("TABLE");
 
-    //create the table element
-    var table = document.createElement("table");
+  //create a header row
+  var headerRow = document.createElement("tr");
 
-    //create a header row
-    var headerRow = document.createElement("tr");
+  //add the first column to the header row
+  var roomieHeader = document.createElement("th");
+  roomieHeader.innerHTML = "Roomie";
+  headerRow.appendChild(roomieHeader);
 
-    //add the "City" column
-    var cityHeader = document.createElement("th");
-    cityHeader.innerHTML = "City";
-    headerRow.appendChild(cityHeader);
+  //add the second column to the header row
+  var choreHeader = document.createElement("th");
+  choreHeader.innerHTML = "Chore";
+  headerRow.appendChild(choreHeader);
 
-    //add the "Population" column
-    var popHeader = document.createElement("th");
-    popHeader.innerHTML = "Population";
-    headerRow.appendChild(popHeader);
+  //append header to the table
+  table.appendChild(headerRow);
 
-    //add the row to the table
-    table.appendChild(headerRow);
+  //loop through arrays to populate the table
+  for(let i = 0; i < roomies.length;i++) {
 
-    //loop to add a new row for each city
-    for (var i = 0; i < cities.length; i++){
-        var tr = document.createElement("tr");
+    //create a row
+    let tempRow = document.createElement("tr");
 
-        var city = document.createElement("td");
-        city.innerHTML = cities[i];
-        tr.appendChild(city);
+    //append the array elements to the row
+    let arr1Element = document.createElement("td");
+    arr1Element.innerHTML = arr1[i];
+    tempRow.appendChild(arr1Element);
+    let arr2Element = document.createElement("td");
+    arr2Element.innerHTML = arr2[i];
+    tempRow.appendChild(arr2Element);
 
-        var pop = document.createElement("td");
-        pop.innerHTML = population[i];
-        tr.appendChild(pop);
+    //append row to table
+    table.appendChild(tempRow);
+  }
 
-        table.appendChild(tr);
-    };
+  //append table to div
+  var mydiv = document.getElementById("mydiv");
+  mydiv.appendChild(table);
+}
 
-    //add the table to the div in index.html
-    var mydiv = document.getElementById("mydiv");
-    mydiv.appendChild(table);
-};
-
-//call the initialize function when the window has loaded
+//create arrays for the table
+var roomies = ['Meggie', 'Katherine','Isabelle','Katie','Meggie bae'];
+var curChore = ['dishes', 'floors', 'windows','dumpster','fluff'];
 window.onload = initialize();
